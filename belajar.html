@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FiveM Whitelist - D'Serra Familia</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="login-container">
+        <div class="login-box">
+            <div class="logo-area">
+                <img src="Untitled_design_16.png" alt="D'Serra Familia Logo" class="main-logo">
+                <p>Roleplay Community</p>
+            </div>
+            
+            <h2>Pendaftaran anggota baru</h2>
+            
+            
+               <form id="whitelistForm">
+    <div class="input-group">
+        <label>Nama Karakter (IC)</label>
+        <input type="text" id="namaIC" placeholder="Contoh: Budi Santoso" required>
+    </div>
+
+    <div class="input-group">
+        <label>USERNAME/ID Discord</label>
+        <input type="text" id="idDiscord" placeholder="user#0000" required>
+    </div>
+
+    <div class="input-group">
+        <label>Umur (IC)</label>
+        <input type="number" id="umurOOC" placeholder="ISI SESUAI IC KALIAN" required>
+    </div>
+
+    <div class="input-group">
+        <label>Latar Belakang Karakter</label>
+        <textarea id="ceritaIC" placeholder="Ceritakan asal usul karaktermu secara singkat...(note:wajib di isi)"></textarea>
+    </div>
+
+    <button type="submit" class="btn-register">Kirim Pendaftaran</button>
+</formx>
+
+<script>
+document.getElementById('whitelistForm').addEventListener('submit', function(e) {
+    e.preventDefault(); 
+
+    // 1. PASTIKAN LINK INI ASLI DARI DISCORD (Copy-Paste pelan-pelan)
+    const webhookURL = "https://discord.com/api/webhooks/1497282748057129103/YwvtjbLM3clZ-hCC79H6ATTGGuPG19vVwGHFhyxQgDA0d1eVW68e14RrQgkVKbhBb566"; 
+
+    // 2. AMBIL DATA (Pastikan ID 'namaIC', 'idDiscord', dll ada di tag <input> kamu)
+    const nama = document.getElementById('namaIC').value;
+    const discord = document.getElementById('idDiscord').value;
+    const umur = document.getElementById('umurOOC').value;
+    const cerita = document.getElementById('ceritaIC').value;
+
+    const pesan = {
+        username: "D'Serra Familia Whitelist",
+        embeds: [{
+            title: "Pendaftaran Whitelist Baru",
+            color: 16727614,
+            fields: [
+                { name: "Nama IC", value: nama, inline: true },
+                { name: "ID Discord", value: discord, inline: true },
+                { name: "Umur OOC", value: umur, inline: true },
+                { name: "Cerita Karakter", value: cerita }
+            ]
+        }]
+    };
+
+    fetch(webhookURL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(pesan)
+    })
+    .then(res => {
+        if(res.ok) {
+            window.location.href = "sukses.html";
+        } else {
+            alert("Discord nolak! Cek link Webhook kamu.");
+        }
+    })
+    .catch(err => {
+        alert("Error: " + err + ". Coba pakai Live Server!");
+    });
+});
+</script>
+
+                
+            </form>
+            
+        </div>
+    </div>
+
+</body>
+</html>
